@@ -1,0 +1,20 @@
+{
+  "Version": 1,
+  "Hash": "hAnP+yii8OhOPptNHcQhTmO38jZd4cNby1DnpRUxMOs=",
+  "Source": "ICAR-LMS-BACK",
+  "BasePath": "_content/ICAR-LMS-BACK",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "ICAR-LMS-BACK\\wwwroot",
+      "Source": "ICAR-LMS-BACK",
+      "ContentRoot": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\wwwroot\\",
+      "BasePath": "_content/ICAR-LMS-BACK",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [],
+  "Endpoints": []
+}
