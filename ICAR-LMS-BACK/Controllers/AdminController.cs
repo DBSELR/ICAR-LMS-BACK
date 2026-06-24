@@ -124,6 +124,8 @@ namespace LMS.Controllers
                         attendance = Convert.ToDouble(reader["AttendancePercentage"]);
                     }
 
+
+
                     // Assign remaining
                     overview.Grades = grades;
                     overview.Submissions = submissions;

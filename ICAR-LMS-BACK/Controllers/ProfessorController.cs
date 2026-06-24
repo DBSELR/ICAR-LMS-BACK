@@ -257,241 +257,54 @@
         }
 
 
-        //[HttpPost]
-        //public async Task<IActionResult> PostProfessor(InstructorRegisterRequest request)
-        //{
-        //    try
-        //    {
-
-
-        //        using var conn = new SqlConnection(_connection);
-        //        using var cmd = new SqlCommand("sp_Professor_PostProfessor", conn);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-
-        //        var usernameParam = new SqlParameter("@Username", SqlDbType.VarChar, 7)
-        //        {
-        //            Direction = ParameterDirection.Output
-        //        };
-
-
-        //        // cmd.Parameters.AddWithValue("@Username", request.Username ?? string.Empty);
-        //        //  cmd.Parameters.AddWithValue("@PasswordHash", BCrypt.Net.BCrypt.HashPassword(request.Password));
-        //        cmd.Parameters.AddWithValue("@PasswordHash", "TEMP");
-        //        cmd.Parameters.AddWithValue("@Email", request.Email ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@FirstName", request.FirstName ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@LastName", request.LastName ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@PhoneNumber", request.PhoneNumber ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@ProfilePictureUrl", request.ProfilePictureUrl ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@OfficeLocation", request.OfficeLocation ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@EmployeeStatus", request.EmployeeStatus ?? "Active");
-        //        cmd.Parameters.AddWithValue("@Department", request.Department ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@Bio", request.Bio ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@OfficeHours", request.OfficeHours ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@SocialMediaLinks", string.Join(",", request.SocialMediaLinks ?? new List<string>()));
-        //        cmd.Parameters.AddWithValue("@EducationalBackground", request.EducationalBackground ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@ResearchInterests", request.ResearchInterests ?? string.Empty);
-        //        cmd.Parameters.AddWithValue("@TeachingRating", (object?)request.TeachingRating ?? DBNull.Value);
-        //        cmd.Parameters.Add(usernameParam);
-
-        //        await conn.OpenAsync();
-        //        await cmd.ExecuteNonQueryAsync();
-
-        //        var generatedUsername = usernameParam.Value?.ToString();
-        //        if (string.IsNullOrEmpty(generatedUsername))
-        //            return StatusCode(500, "Username generation failed.");
-
-        //        // Step 2: Use username as password
-        //        var rawPassword = generatedUsername;
-        //        var hashedPassword = BCrypt.Net.BCrypt.HashPassword(rawPassword);
-
-        //        // Step 3: Update password
-        //        using var updateCmd = new SqlCommand("UPDATE Users SET PasswordHash = @PasswordHash WHERE Username = @Username", conn);
-        //        updateCmd.Parameters.AddWithValue("@PasswordHash", hashedPassword);
-        //        updateCmd.Parameters.AddWithValue("@Username", generatedUsername);
-        //        await updateCmd.ExecuteNonQueryAsync();
-
-        //        // Step 4: Get newly created UserId
-        //        using var userIdCmd = new SqlCommand("SELECT UserId FROM Users WHERE Username = @Username", conn);
-        //        userIdCmd.Parameters.AddWithValue("@Username", generatedUsername);
-        //        var userIdObj = await userIdCmd.ExecuteScalarAsync();
-        //        if (userIdObj == null)
-        //            return StatusCode(500, "Failed to retrieve UserId.");
-        //        int userId = Convert.ToInt32(userIdObj);
-
-        //        return Ok(new
-        //        {
-        //            Username = generatedUsername,
-        //            Password = rawPassword,
-        //            Message = "Professor registered successfully"
-        //        });
-
-        //        // return Ok(new { message = "Professor registered successfully." });
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, $"Internal server error: {ex.Message}");
-        //    }
-        //    //catch (SqlException ex)
-        //    //{
-        //    //    // Handle common SQL constraint violations
-        //    //    if (ex.Number == 2627 || ex.Number == 2601) // Unique constraint violation
-        //    //    {
-        //    //        return Conflict(new { error = "A professor with the same username or email already exists." });
-        //    //    }
-
-        //    //    // Other SQL errors
-        //    //    return StatusCode(500, new { error = $"SQL error {ex.Number}: {ex.Message}" });
-        //    //}
-        //    //catch (Exception ex)
-        //    //{
-        //    //    // General fallback error
-        //    //    return StatusCode(500, new { error = $"Unexpected error: {ex.Message}" });
-        //    //}
-        //}
-
-
         [HttpPost]
         public async Task<IActionResult> PostProfessor(InstructorRegisterRequest request)
         {
             try
             {
                 using var conn = new SqlConnection(_connection);
-                using var cmd = new SqlCommand("sp_Professor_PostProfessor", conn)
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
+                using var cmd = new SqlCommand("sp_Professor_PostProfessor", conn);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-                var usernameParam = new SqlParameter("@Username", SqlDbType.NVarChar, 7)
-                {
-                    Direction = ParameterDirection.Output
-                };
-
-                // Initial TEMP password; will overwrite with the username after insert succeeds
-                cmd.Parameters.Add(usernameParam);
-                cmd.Parameters.AddWithValue("@PasswordHash", "TEMP");
+                cmd.Parameters.AddWithValue("@Username", request.Username ?? string.Empty);
+                cmd.Parameters.AddWithValue("@PasswordHash", BCrypt.Net.BCrypt.HashPassword(request.Password));
                 cmd.Parameters.AddWithValue("@Email", request.Email ?? string.Empty);
                 cmd.Parameters.AddWithValue("@FirstName", request.FirstName ?? string.Empty);
                 cmd.Parameters.AddWithValue("@LastName", request.LastName ?? string.Empty);
                 cmd.Parameters.AddWithValue("@PhoneNumber", request.PhoneNumber ?? string.Empty);
-                cmd.Parameters.AddWithValue("@ProfilePictureUrl", request.ProfilePictureUrl ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@OfficeLocation", request.OfficeLocation ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@ProfilePictureUrl", request.ProfilePictureUrl ?? string.Empty);
+                cmd.Parameters.AddWithValue("@OfficeLocation", request.OfficeLocation ?? string.Empty);
                 cmd.Parameters.AddWithValue("@EmployeeStatus", request.EmployeeStatus ?? "Active");
-                cmd.Parameters.AddWithValue("@Department", request.Department ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@Bio", request.Bio ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@OfficeHours", request.OfficeHours ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@SocialMediaLinks",
-                    (request.SocialMediaLinks != null && request.SocialMediaLinks.Count > 0)
-                        ? string.Join(",", request.SocialMediaLinks)
-                        : (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@EducationalBackground", request.EducationalBackground ?? (object)DBNull.Value);
-                cmd.Parameters.AddWithValue("@ResearchInterests", request.ResearchInterests ?? (object)DBNull.Value);
+                cmd.Parameters.AddWithValue("@Department", request.Department ?? string.Empty);
+                cmd.Parameters.AddWithValue("@Bio", request.Bio ?? string.Empty);
+                cmd.Parameters.AddWithValue("@OfficeHours", request.OfficeHours ?? string.Empty);
+                cmd.Parameters.AddWithValue("@SocialMediaLinks", string.Join(",", request.SocialMediaLinks ?? new List<string>()));
+                cmd.Parameters.AddWithValue("@EducationalBackground", request.EducationalBackground ?? string.Empty);
+                cmd.Parameters.AddWithValue("@ResearchInterests", request.ResearchInterests ?? string.Empty);
                 cmd.Parameters.AddWithValue("@TeachingRating", (object?)request.TeachingRating ?? DBNull.Value);
 
                 await conn.OpenAsync();
+                await cmd.ExecuteNonQueryAsync();
 
-                // Read the result set to detect conflicts / success
-                using (var reader = await cmd.ExecuteReaderAsync())
-                {
-                    var conflicts = new List<object>();
-                    bool gotAnyRows = false;
-                    bool success = false;
-                    string? generatedUsernameFromRow = null;
-
-                    while (await reader.ReadAsync())
-                    {
-                        gotAnyRows = true;
-
-                        // The proc returns: Success(bit), ConflictType (nullable), Details (nullable)
-                        success = reader.GetBoolean(reader.GetOrdinal("Success"));
-
-                        if (!success)
-                        {
-                            // Collect all conflicts rows
-                            var typeOrdinal = reader.GetOrdinal("ConflictType");
-                            var detailsOrdinal = reader.GetOrdinal("Details");
-                            var conflictType = reader.IsDBNull(typeOrdinal) ? null : reader.GetString(typeOrdinal);
-                            var details = reader.IsDBNull(detailsOrdinal) ? null : reader.GetString(detailsOrdinal);
-
-                            // Only push actual conflict rows (skip generic)
-                            if (!string.IsNullOrEmpty(conflictType))
-                            {
-                                conflicts.Add(new { ConflictType = conflictType, Details = details });
-                            }
-                        }
-                        else
-                        {
-                            // On success row, Details = Username
-                            var detailsOrdinal = reader.GetOrdinal("Details");
-                            generatedUsernameFromRow = reader.IsDBNull(detailsOrdinal) ? null : reader.GetString(detailsOrdinal);
-                        }
-                    }
-
-                    // If the proc returned conflicts
-                    if (gotAnyRows && !success)
-                    {
-                        // Return 409 with structured details for the frontend to handle
-                        return Conflict(new
-                        {
-                            error = "Duplicate fields found",
-                            conflicts = conflicts,  // e.g. [{ ConflictType: 'EMAIL_EXISTS', Details: 'x@y.com' }, ...]
-                        });
-                    }
-
-                    // If we didn't get a success row, fail
-                    if (!gotAnyRows || string.IsNullOrEmpty(generatedUsernameFromRow))
-                    {
-                        return StatusCode(500, "Username generation failed.");
-                    }
-
-                    // Success: set password = username (hash)
-                    var rawPassword = generatedUsernameFromRow;
-                    var hashedPassword = BCrypt.Net.BCrypt.HashPassword(rawPassword);
-
-                    using (var updateCmd = new SqlCommand("UPDATE Users SET PasswordHash = @PasswordHash WHERE Username = @Username", conn))
-                    {
-                        updateCmd.Parameters.AddWithValue("@PasswordHash", hashedPassword);
-                        updateCmd.Parameters.AddWithValue("@Username", generatedUsernameFromRow);
-                        await updateCmd.ExecuteNonQueryAsync();
-                    }
-
-                   
-                    // int userId;
-                    // using (var userIdCmd = new SqlCommand("SELECT UserId FROM Users WHERE Username = @Username", conn))
-                    // {
-                    //     userIdCmd.Parameters.AddWithValue("@Username", generatedUsernameFromRow);
-                    //     var userIdObj = await userIdCmd.ExecuteScalarAsync();
-                    //     if (userIdObj == null) return StatusCode(500, "Failed to retrieve UserId.");
-                    //     userId = Convert.ToInt32(userIdObj);
-                    // }
-
-                    return Ok(new
-                    {
-                        Username = generatedUsernameFromRow,
-                        Password = rawPassword, // first-time password
-                        Message = "Professor registered successfully"
-                    });
-                }
+                return Ok(new { message = "Professor registered successfully." });
             }
             catch (SqlException ex)
             {
-                // Map unique index violations (if you add the recommended UNIQUE indexes)
-                if (ex.Number == 2627 || ex.Number == 2601)
+                // Handle common SQL constraint violations
+                if (ex.Number == 2627 || ex.Number == 2601) // Unique constraint violation
                 {
-                    // You can inspect ex.Message to guess which index, but better to keep generic:
-                    return Conflict(new
-                    {
-                        error = "Duplicate detected by database index.",
-                        sqlError = ex.Message
-                    });
+                    return Conflict(new { error = "A professor with the same username or email already exists." });
                 }
+
+                // Other SQL errors
                 return StatusCode(500, new { error = $"SQL error {ex.Number}: {ex.Message}" });
             }
             catch (Exception ex)
             {
+                // General fallback error
                 return StatusCode(500, new { error = $"Unexpected error: {ex.Message}" });
             }
         }
-
 
 
         [HttpPut("{id}")]

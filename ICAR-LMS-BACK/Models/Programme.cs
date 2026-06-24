@@ -11,15 +11,16 @@ namespace LMS.Models
         public int ProgrammeId { get; set; }
 
         [Required]
-        [StringLength(100)]
+        [StringLength(15)]
         public string ProgrammeCode { get; set; }
 
-       
+        [Required]
+        [StringLength(100)]
         public string ProgrammeName { get; set; }
 
-      
+        [Required]
         [StringLength(20)]
-        public string? BatchName { get; set; }
+        public string BatchName { get; set; }
 
         [Required]
         [Range(1, 20)]

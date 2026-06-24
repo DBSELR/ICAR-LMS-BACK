@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ICAR-LMS-BACK")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cacf00c659b76967d2c94b766ab7610ac26d932a")]
 [assembly: System.Reflection.AssemblyProductAttribute("ICAR-LMS-BACK")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ICAR-LMS-BACK")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

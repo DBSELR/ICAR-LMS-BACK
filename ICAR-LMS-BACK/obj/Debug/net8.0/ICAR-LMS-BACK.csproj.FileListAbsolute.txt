@@ -129,6 +129,7 @@ D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\ICAR-LMS-BACK.
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\ICAR-LMS-BACK.csproj.CoreCompileInputs.cache
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\ICAR-LMS-BACK.MvcApplicationPartsAssemblyInfo.cs
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\ICAR-LMS-BACK.MvcApplicationPartsAssemblyInfo.cache
+D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\ICAR-LMS-BACK.sourcelink.json
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\scopedcss\bundle\ICAR-LMS-BACK.styles.css
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\staticwebassets.build.json
 D:\work_svn\ICAR-LMS\ICAR-LMS-BACK\ICAR-LMS-BACK\obj\Debug\net8.0\staticwebassets.development.json

@@ -35,7 +35,7 @@ namespace LMS.Controllers
         }
 
         [HttpGet("ByProgrammeAndSemester")]
-        public async Task<IActionResult> GetCoursesByProgrammeAndSemester()
+        public async Task<IActionResult> GetCoursesByProgrammeAndSemester(string batchName, int semester)
         {
             var result = new List<object>();
             using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
@@ -43,8 +43,8 @@ namespace LMS.Controllers
             {
                 CommandType = CommandType.StoredProcedure
             };
-            //cmd.Parameters.AddWithValue("@Board", Board);
-            //cmd.Parameters.AddWithValue("@Class", group.ToString());
+            cmd.Parameters.AddWithValue("@Batch", batchName);
+            cmd.Parameters.AddWithValue("@Semester", semester.ToString());
 
             await conn.OpenAsync();
             using var reader = await cmd.ExecuteReaderAsync();
