@@ -59,6 +59,8 @@ public class ExaminationController : ControllerBase
             cmd.Parameters.AddWithValue("@theoryPass", model.GetProperty("theoryPass").GetInt32());
             cmd.Parameters.AddWithValue("@totalMax", model.GetProperty("totalMax").GetInt32());
             cmd.Parameters.AddWithValue("@totalPass", model.GetProperty("totalPass").GetInt32());
+            cmd.Parameters.AddWithValue("@ProgrammeId",model.GetProperty("programmeId").GetInt32());
+            cmd.Parameters.AddWithValue("@Fee",model.GetProperty("fee").GetDecimal());
 
             await conn.OpenAsync();
             await cmd.ExecuteNonQueryAsync();
@@ -121,6 +123,8 @@ public class ExaminationController : ControllerBase
         cmd.Parameters.AddWithValue("@totalMax", model.GetProperty("totalMax").GetInt32());
         cmd.Parameters.AddWithValue("@totalPass", model.GetProperty("totalPass").GetInt32());
         cmd.Parameters.AddWithValue("@ExaminationId", model.GetProperty("examinationId").GetInt32());
+        cmd.Parameters.AddWithValue("@ProgrammeId",model.GetProperty("programmeId").GetInt32());
+        cmd.Parameters.AddWithValue("@Fee",model.GetProperty("fee").GetDecimal());
 
         await conn.OpenAsync();
         await cmd.ExecuteNonQueryAsync();
@@ -280,6 +284,33 @@ public class ExaminationController : ControllerBase
         using var reader = await cmd.ExecuteReaderAsync();
         while (await reader.ReadAsync())
             result.Add(ReadRow(reader));
+
+        return Ok(result);
+    }
+
+    [HttpGet("GetAssignSubjectsByProgrammeID")]
+    public async Task<IActionResult> GetAssignSubjectsByProgrammeID(int courseId)
+    {
+        var result = new List<object>();
+
+        using var conn = new SqlConnection(
+            _configuration.GetConnectionString("DefaultConnection"));
+
+        using var cmd = new SqlCommand(
+            "sp_Course_GetAssignSubjectsByProgrammeID",
+            conn);
+
+        cmd.CommandType = CommandType.StoredProcedure;
+        cmd.Parameters.AddWithValue("@CourseId", courseId);
+
+        await conn.OpenAsync();
+
+        using var reader = await cmd.ExecuteReaderAsync();
+
+        while (await reader.ReadAsync())
+        {
+            result.Add(ReadRow(reader));
+        }
 
         return Ok(result);
     }

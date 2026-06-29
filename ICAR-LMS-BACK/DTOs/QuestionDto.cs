@@ -18,6 +18,7 @@ namespace LMS.Models.DTOs
 
         public class ExamCreateDto
         {
+            public string BatchName { get; set; }
             public string Title { get; set; }
             public string ExamDate { get; set; }
             public int DurationMinutes { get; set; }

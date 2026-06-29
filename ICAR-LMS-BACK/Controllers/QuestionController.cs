@@ -226,48 +226,193 @@ namespace LMS.Controllers
         //    return Ok(new { message = "Exam created successfully", examId = (int)outputId.Value });
         //}
 
+        //[HttpPost("CreateFull")]
+        //public async Task<IActionResult> CreateExamWithQuestions(
+        //            [FromForm] IFormFile file,
+        //            [FromForm] string examJson)
+        //{
+        //    string fileUrl = null;
+        //    Console.WriteLine("📥 File received: " + file?.FileName);
+        //    Console.WriteLine("📦 File length: " + file?.Length);
+
+        //    ExamCreateDto dto;
+        //    try
+        //    { 
+        //        dto = Newtonsoft.Json.JsonConvert.DeserializeObject<ExamCreateDto>(examJson);
+
+        //        // dto = JsonSerializer.Deserialize<ExamCreateDto>(examJson);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest("❌ Failed to parse examJson: " + ex.Message);
+        //    }
+
+
+        //    if (file != null && file.Length > 0)
+        //    {
+        //        var uploadsPath = Path.Combine(_env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "uploads", "exams");
+        //        Directory.CreateDirectory(uploadsPath);
+
+        //        var fileName = Path.GetFileName(file.FileName);
+        //        var filePath = Path.Combine(uploadsPath, fileName);
+        //        fileUrl = $"/uploads/exams/{fileName}";
+
+        //        try
+        //        {
+        //            using var stream = new FileStream(filePath, FileMode.Create);
+        //            await file.CopyToAsync(stream);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            return StatusCode(500, "❌ File save failed: " + ex.Message);
+        //        }
+        //    }
+
+
+        //    using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        //    await conn.OpenAsync();
+
+        //    using var cmd = new SqlCommand("sp_InsertExamWithQuestions", conn)
+        //    {
+        //        CommandType = CommandType.StoredProcedure
+        //    };
+
+        //    cmd.Parameters.AddWithValue("@Title", dto.Title);
+        //    //cmd.Parameters.AddWithValue("@ExamDate", dto.ExamDate);
+
+        //    if (DateTime.TryParse(dto.ExamDate, out var parsedDate))
+        //        cmd.Parameters.AddWithValue("@ExamDate", parsedDate);
+        //    else
+        //        return BadRequest("❌ Invalid exam date format.");
+
+
+        //    cmd.Parameters.AddWithValue("@DurationMinutes", dto.DurationMinutes);
+        //    cmd.Parameters.AddWithValue("@totmrk", dto.totalmarks);
+        //    cmd.Parameters.AddWithValue("@passmrk", dto.passingmarks);
+        //    cmd.Parameters.AddWithValue("@CreatedBy", dto.CreatedBy);
+        //    cmd.Parameters.AddWithValue("@ExaminationID", dto.ExaminationID);
+        //    cmd.Parameters.AddWithValue("@ExamType", dto.Type);
+        //    //cmd.Parameters.AddWithValue("@fileurl", fileUrl);
+        //    cmd.Parameters.AddWithValue("@fileurl", (object?)fileUrl ?? DBNull.Value);
+
+        //    if (dto.Questions != null && dto.Questions.Count > 0)
+        //    {
+        //        var questionTable = new DataTable();
+        //        questionTable.Columns.Add("QuestionText");
+        //        questionTable.Columns.Add("OptionA");
+        //        questionTable.Columns.Add("OptionB");
+        //        questionTable.Columns.Add("OptionC");
+        //        questionTable.Columns.Add("OptionD");
+        //        questionTable.Columns.Add("CorrectOption");
+        //        questionTable.Columns.Add("DifficultyLevel");
+        //        questionTable.Columns.Add("Topic");
+        //        questionTable.Columns.Add("SuggestedMarks");
+
+        //        foreach (var q in dto.Questions)
+        //        {
+        //            questionTable.Rows.Add(
+        //                q.QuestionText,
+        //                q.OptionA,
+        //                q.OptionB,
+        //                q.OptionC,
+        //                q.OptionD,
+        //                q.CorrectOption,
+        //                q.DifficultyLevel ?? "Medium",
+        //                q.Topic ?? "General",
+        //                q.SuggestedMarks
+        //            );
+        //        }
+
+        //        var tvp = new SqlParameter("@Questions", questionTable)
+        //        {
+        //            SqlDbType = SqlDbType.Structured,
+        //            TypeName = "QuestionTableType"
+        //        };
+        //        cmd.Parameters.Add(tvp);
+        //    }
+
+        //    var outputId = new SqlParameter("@NewExamId", SqlDbType.Int)
+        //    {
+        //        Direction = ParameterDirection.Output
+        //    };
+        //    cmd.Parameters.Add(outputId);
+
+        //    try
+        //    {
+        //        await cmd.ExecuteNonQueryAsync();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return StatusCode(500, "❌ SQL Execution Failed: " + ex.Message);
+        //    }
+
+        //    return Ok(new
+        //    {
+        //        message = "✅ Exam created successfully",
+        //        examId = (int)outputId.Value,
+        //        fileUrl
+        //    });
+        //}
+
         [HttpPost("CreateFull")]
         public async Task<IActionResult> CreateExamWithQuestions(
-                    [FromForm] IFormFile file,
-                    [FromForm] string examJson)
+            [FromForm] IFormFile file,
+            [FromForm] string examJson)
         {
-            string fileUrl = null;
+            string? fileUrl = null;
+            string? storedFileName = null;
+
             Console.WriteLine("📥 File received: " + file?.FileName);
             Console.WriteLine("📦 File length: " + file?.Length);
 
             ExamCreateDto dto;
             try
-            { 
+            {
                 dto = Newtonsoft.Json.JsonConvert.DeserializeObject<ExamCreateDto>(examJson);
-
-                // dto = JsonSerializer.Deserialize<ExamCreateDto>(examJson);
             }
             catch (Exception ex)
             {
                 return BadRequest("❌ Failed to parse examJson: " + ex.Message);
             }
-             
 
+            /* ============================
+               PROCESS FILE WITH TIMESTAMP
+               ============================ */
             if (file != null && file.Length > 0)
             {
-                var uploadsPath = Path.Combine(_env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot"), "uploads", "exams");
+                var webRoot = _env.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+                var uploadsPath = Path.Combine(webRoot, "uploads", "exams");
                 Directory.CreateDirectory(uploadsPath);
 
-                var fileName = Path.GetFileName(file.FileName);
-                var filePath = Path.Combine(uploadsPath, fileName);
-                fileUrl = $"/uploads/exams/{fileName}";
+                var original = Path.GetFileName(file.FileName);
+                var ext = Path.GetExtension(original);
+                var baseName = Path.GetFileNameWithoutExtension(original);
+
+                // sanitize filename
+                baseName = System.Text.RegularExpressions.Regex.Replace(baseName, @"[^A-Za-z0-9_\-]+", "_");
+
+                // timestamp
+                var ts = DateTime.UtcNow.ToString("yyyyMMdd_HHmmssfff");
+                storedFileName = $"{baseName}_{ts}{ext}";
+
+                var filePath = Path.Combine(uploadsPath, storedFileName);
 
                 try
                 {
-                    using var stream = new FileStream(filePath, FileMode.Create);
+                    using var stream = new FileStream(filePath, FileMode.CreateNew, FileAccess.Write, FileShare.None);
                     await file.CopyToAsync(stream);
                 }
                 catch (Exception ex)
                 {
                     return StatusCode(500, "❌ File save failed: " + ex.Message);
                 }
+
+                fileUrl = $"/uploads/exams/{storedFileName}";
             }
 
+            /* ============================
+               SAVE TO DATABASE
+               ============================ */
 
             using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
             await conn.OpenAsync();
@@ -276,15 +421,13 @@ namespace LMS.Controllers
             {
                 CommandType = CommandType.StoredProcedure
             };
-
-            cmd.Parameters.AddWithValue("@Title", dto.Title);
-            //cmd.Parameters.AddWithValue("@ExamDate", dto.ExamDate);
+            cmd.Parameters.AddWithValue("@BatchName", dto.BatchName);
+            cmd.Parameters.AddWithValue("@Title", dto.Title); 
 
             if (DateTime.TryParse(dto.ExamDate, out var parsedDate))
                 cmd.Parameters.AddWithValue("@ExamDate", parsedDate);
             else
                 return BadRequest("❌ Invalid exam date format.");
-
 
             cmd.Parameters.AddWithValue("@DurationMinutes", dto.DurationMinutes);
             cmd.Parameters.AddWithValue("@totmrk", dto.totalmarks);
@@ -292,9 +435,10 @@ namespace LMS.Controllers
             cmd.Parameters.AddWithValue("@CreatedBy", dto.CreatedBy);
             cmd.Parameters.AddWithValue("@ExaminationID", dto.ExaminationID);
             cmd.Parameters.AddWithValue("@ExamType", dto.Type);
-            //cmd.Parameters.AddWithValue("@fileurl", fileUrl);
+
             cmd.Parameters.AddWithValue("@fileurl", (object?)fileUrl ?? DBNull.Value);
 
+            /* ========== TVP Questions ========== */
             if (dto.Questions != null && dto.Questions.Count > 0)
             {
                 var questionTable = new DataTable();
@@ -350,9 +494,11 @@ namespace LMS.Controllers
             {
                 message = "✅ Exam created successfully",
                 examId = (int)outputId.Value,
-                fileUrl
+                fileUrl,
+                storedFileName
             });
         }
+
 
         [HttpGet("GetWithQuestions/{examId}")]
         public async Task<IActionResult> GetExamWithQuestions(int examId)

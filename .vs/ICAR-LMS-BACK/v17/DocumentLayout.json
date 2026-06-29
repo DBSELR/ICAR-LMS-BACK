@@ -3,12 +3,36 @@
   "WorkspaceRootPath": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\controllers\\coursecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\controllers\\examinationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\controllers\\examinationcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
       "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\controllers\\programmecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\controllers\\programmecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\models\\programme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\models\\programme.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\controllers\\studentcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|d:\\work_svn\\icar-lms\\icar-lms-back\\icar-lms-back\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{68CC87F5-5234-4133-BD73-E5AC3D98E994}|ICAR-LMS-BACK\\ICAR-LMS-BACK.csproj|solutionrelative:icar-lms-back\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,25 +55,103 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CourseController.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\CourseController.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Controllers\\CourseController.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\CourseController.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Controllers\\CourseController.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAgwL8BAAA+AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-27T04:52:49.656Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ExaminationController.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\ExaminationController.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Controllers\\ExaminationController.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\ExaminationController.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Controllers\\ExaminationController.cs",
+              "ViewState": "AgIAACABAAAAAAAAAAAmwCoBAAAnAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T12:48:47.249Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Programme.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Models\\Programme.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Models\\Programme.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Models\\Programme.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Models\\Programme.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T11:09:21.647Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ProgrammeController.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\ProgrammeController.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Controllers\\ProgrammeController.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\ProgrammeController.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Controllers\\ProgrammeController.cs",
+              "ViewState": "AgIAAIgCAAAAAAAAAIAwwKICAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T11:00:49.826Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "StudentController.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\StudentController.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Controllers\\StudentController.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\StudentController.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Controllers\\StudentController.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAawEUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T10:09:20.612Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "UserController.cs",
+              "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\UserController.cs",
+              "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Controllers\\UserController.cs",
+              "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Controllers\\UserController.cs",
+              "RelativeToolTip": "ICAR-LMS-BACK\\Controllers\\UserController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:33:29.289Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Program.cs",
               "RelativeDocumentMoniker": "ICAR-LMS-BACK\\Program.cs",
               "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\Program.cs",
               "RelativeToolTip": "ICAR-LMS-BACK\\Program.cs",
-              "ViewState": "AgIAAMwAAAAAAAAAAAAAANkAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAPkAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-06-24T06:42:56.009Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "appsettings.json",
               "DocumentMoniker": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\appsettings.json",
               "RelativeDocumentMoniker": "ICAR-LMS-BACK\\appsettings.json",
               "ToolTip": "D:\\work_svn\\ICAR-LMS\\ICAR-LMS-BACK\\ICAR-LMS-BACK\\appsettings.json",
               "RelativeToolTip": "ICAR-LMS-BACK\\appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAB0AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
               "WhenOpened": "2026-06-24T05:47:26.504Z",
               "EditorCaption": ""

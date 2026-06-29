@@ -1,31 +1,5 @@
 [
   {
-    "ContainingType": "LMS_INTERNS_BACK.Controllers.AbsenteesentryController",
-    "Method": "INSERAB",
-    "RelativePath": "api/Absenteesentry/insert",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "LMS_INTERNS_BACK.Controllers.AbsenteesentryController\u002BAbsentees",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "LMS_INTERNS_BACK.Controllers.AbsenteesentryController",
-    "Method": "LoadallABSENTEES",
-    "RelativePath": "api/Absenteesentry/Loadall",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "LMS.Controllers.AdminController",
     "Method": "GetAllStudents",
     "RelativePath": "api/Admin/students",
@@ -65,16 +39,6 @@
     "ContainingType": "LMS.Controllers.AdminSummaryController",
     "Method": "GetDashboardSummary",
     "RelativePath": "api/AdminSummary/dashboard",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "LMS.Controllers.AdminSummaryController",
-    "Method": "GetFeesummary",
-    "RelativePath": "api/AdminSummary/GetFeesummary",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -679,6 +643,226 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "Broucherleadsave",
+    "RelativePath": "api/BulkSms/Broucherleadsave",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "course",
+        "Type": "LMS_SA_BACK.Controllers.BulkSmsController\u002BBroucherLead",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetStudentCount",
+    "RelativePath": "api/BulkSms/count",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "uname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "semester",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programmes",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "EnqueueStudentSms",
+    "RelativePath": "api/BulkSms/enqueue",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "req",
+        "Type": "LMS_SA_BACK.Controllers.BulkSmsController\u002BStudentSmsRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "EnqueueFromStudents",
+    "RelativePath": "api/BulkSms/enqueue-from-students",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "message",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetAllFilters",
+    "RelativePath": "api/BulkSms/filters",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetGroupsSemesters",
+    "RelativePath": "api/BulkSms/groupsemester",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "uname",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "programme",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "HotLeadSave",
+    "RelativePath": "api/BulkSms/hotleadsave",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ref",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "course",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "mainleadsave",
+    "RelativePath": "api/BulkSms/mainleadsave",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "course",
+        "Type": "LMS_SA_BACK.Controllers.BulkSmsController\u002BCreateMainLead",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetProgrammes",
+    "RelativePath": "api/BulkSms/programmes/{uname}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "uname",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "SaveLead",
+    "RelativePath": "api/BulkSms/save",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ref",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetSmsStatusSummary",
+    "RelativePath": "api/BulkSms/status-summary",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "Gettempcodes",
+    "RelativePath": "api/BulkSms/tempcodes",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetTemplateContent",
+    "RelativePath": "api/BulkSms/TemplateContent/{templateCode}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "templateCode",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS_SA_BACK.Controllers.BulkSmsController",
+    "Method": "GetUname",
+    "RelativePath": "api/BulkSms/unames",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "LMS.Controllers.CalendarEventController",
@@ -1749,6 +1933,22 @@
       {
         "Name": "Semester",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ExaminationController",
+    "Method": "GetAssignSubjectsByProgrammeID",
+    "RelativePath": "api/Examination/GetAssignSubjectsByProgrammeID",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "courseId",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -3891,22 +4091,6 @@
   },
   {
     "ContainingType": "LMS.Controllers.PaymentsController",
-    "Method": "InitiateMultiPayment",
-    "RelativePath": "api/Payments/initiate-multi-payment",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "request",
-        "Type": "LMS.DTOs.InitiateMultiPaymentDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "LMS.Controllers.PaymentsController",
     "Method": "PhonePeCallback",
     "RelativePath": "api/Payments/phonepe/callback",
     "HttpMethod": "POST",
@@ -3932,22 +4116,6 @@
       {
         "Name": "dto",
         "Type": "LMS.DTOs.PhonePeInitiateDto",
-        "IsRequired": true
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "LMS.Controllers.PaymentsController",
-    "Method": "InitiatePhonePeMulti",
-    "RelativePath": "api/Payments/phonepe/initiate-multi",
-    "HttpMethod": "POST",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "dto",
-        "Type": "LMS.DTOs.InitiateMultiPaymentDto",
         "IsRequired": true
       }
     ],
@@ -5155,6 +5323,27 @@
   },
   {
     "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "Calculate",
+    "RelativePath": "api/student/calculate",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "price",
+        "Type": "System.Decimal",
+        "IsRequired": false
+      },
+      {
+        "Name": "coupon",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
     "Method": "Getcollegewisestudents",
     "RelativePath": "api/student/collegewisestudents/{instructorId}",
     "HttpMethod": "GET",
@@ -5178,6 +5367,16 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "GetCoupons",
+    "RelativePath": "api/student/coupons",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
   },
   {
     "ContainingType": "LMS.Controllers.StudentController",
@@ -5229,6 +5428,22 @@
   },
   {
     "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "GetAppliedDiscount",
+    "RelativePath": "api/student/GetAppliedDiscount/{mobile}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mobile",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
     "Method": "GetgetApprovependingstudentlist",
     "RelativePath": "api/student/GetgetApprovependingstudentlist",
     "HttpMethod": "GET",
@@ -5245,6 +5460,16 @@
   },
   {
     "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "GetCoursesByBatch",
+    "RelativePath": "api/student/GetLandCourses",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
     "Method": "GetReferralDetails",
     "RelativePath": "api/student/GetReferralDetails",
     "HttpMethod": "GET",
@@ -5253,6 +5478,54 @@
     "Parameters": [
       {
         "Name": "UserCode",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "GetStudentDetailsByMobile",
+    "RelativePath": "api/student/GetStudentDetailsByMobile/{mobile}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mobile",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "GetStudentPaymentStatus",
+    "RelativePath": "api/student/GetStudentPaymentStatus/{mobile}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mobile",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "LandingFeeCalculation",
+    "RelativePath": "api/student/LandingFeeCalculation",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "mobileNo",
         "Type": "System.String",
         "IsRequired": false
       }
@@ -5360,6 +5633,22 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "LMS.Controllers.StudentController",
+    "Method": "Save",
+    "RelativePath": "api/student/SaveAppliedDiscount",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "data",
+        "Type": "LMS.Controllers.StudentController\u002BAppliedDiscountDto",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   },
   {

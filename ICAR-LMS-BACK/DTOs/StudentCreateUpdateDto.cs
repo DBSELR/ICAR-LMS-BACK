@@ -19,10 +19,12 @@
         public string ProfilePhotoUrl { get; set; }
         public string Batch { get; set; }
         public int programmeId { get; set; }
-        public int groupId { get; set; }
+      //  public int groupId { get; set; }
         public int sem { get; set; }
         //public string Semester { get; set; }
 
         public int semester { get; set; }
+        public string degree { get; set; }
+        
     }
 }

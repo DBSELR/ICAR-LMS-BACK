@@ -24,4 +24,10 @@ namespace LMS.Models
         [JsonIgnore]
         public Course Course { get; set; }
     }
+
+    public class ContentProgressUpdateDto
+    {
+        public int ContentId { get; set; }
+        public int ProgressPercent { get; set; } // 0–100
+    }
 }

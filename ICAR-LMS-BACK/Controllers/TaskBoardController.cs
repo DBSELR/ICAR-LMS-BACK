@@ -119,20 +119,21 @@ namespace LMS.Controllers
             _connectionString = _configuration.GetConnectionString("DefaultConnection");
         }
 
-        [HttpGet]
+        [HttpGet("GetTasks")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public IActionResult GetTasks()
+        public IActionResult GetTasks(int UserId)
         {
             var dt = new DataTable();
             using var conn = new SqlConnection(_connectionString);
             using var cmd = new SqlCommand("sp_TaskBoard_GetTasks", conn);
+            cmd.Parameters.AddWithValue("@UserId", UserId);
             cmd.CommandType = CommandType.StoredProcedure;
             new SqlDataAdapter(cmd).Fill(dt);
             var result = DataTableConverter.ToDictionaryList(dt);
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("CreateTask")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult CreateTask([FromBody] TaskItem task)

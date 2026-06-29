@@ -64,6 +64,8 @@ namespace LMS.DTOs
         public int FeeId { get; set; }
         public int StudentId { get; set; }
         public string StudentName { get; set; }
+
+        public string Regno { get; set; }
         public int programmeId { get; set; }
         public int groupId { get; set; }
         public string Batch { get; set; }
@@ -74,6 +76,8 @@ namespace LMS.DTOs
         public DateTime DueDate { get; set; }
         public DateTime? PaymentDate { get; set; }
         public int Installment { get; set; }
+
+        public int SemesterFeeTemplateId { get; set; }
         public decimal Fee { get; set; }
         public decimal Paid { get; set; }
         public decimal Due { get; set; }
@@ -86,6 +90,10 @@ namespace LMS.DTOs
         public string FeeHead { get; set; }
 
         public string Remarks { get; set; }
+        public int ftid { get; set; }
+        public string course { get; set; }
+        public string sname { get; set; }
+        public string mobile { get; set; }
     }
 
     
@@ -99,6 +107,7 @@ namespace LMS.DTOs
         public string TransactionId { get; set; }
         public int Installment { get; set; }
         public int payHeadID { get; set; }
+        public int SemesterFeeTemplateId { get; set; }
     }
 
     public class SemesterFeeRequest
@@ -126,9 +135,21 @@ namespace LMS.DTOs
         public int? Hid { get; set; }
         public int? GroupId { get; set; }
         public int? Installment { get; set; }
+        public int? colid { get; set; }
 
     }
 
+
+    public sealed class PayFeeItemDto
+    {
+        public string StudentID { get; set; } = default!;
+        public decimal Amount { get; set; }        // amount to pay for this row
+        public int Installment { get; set; }
+        public string? PaymentMethod { get; set; } // default "Cash"
+        public string? TransactionId { get; set; } // client/gen id
+        public int payHeadID { get; set; } 
+        public int ftid { get; set; }
+    }
 
 
 

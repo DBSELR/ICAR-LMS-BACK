@@ -238,6 +238,18 @@ namespace LMS.Controllers
             return Ok(result);
         }
 
+        [HttpDelete("Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_PracticeExams_Delete", conn) { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.AddWithValue("@Id", id);
+
+            await conn.OpenAsync();
+            await cmd.ExecuteNonQueryAsync();
+            return NoContent();
+        }
+
         [HttpGet("GetAssignmentSubmissionListById/{examid}")]
         public async Task<IActionResult> GetAssignmentSubmissionListById(int examid)
         {

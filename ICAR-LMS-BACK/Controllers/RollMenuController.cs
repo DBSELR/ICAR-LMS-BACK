@@ -127,5 +127,38 @@ namespace LMS.Controllers
             });
         }
 
+        [HttpGet("GetMainMenu")]
+        public async Task<IActionResult> GetMainMenu()
+        {
+            var result = new List<object>();
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_GetMainmenu", conn)
+            { CommandType = CommandType.StoredProcedure };
+           // cmd.Parameters.AddWithValue("@Bid", Bid);
+            await conn.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+                result.Add(ReadRow(reader));
+
+            return Ok(result);
+        }
+
+        [HttpPut("UpdateMenuorder/{mmid}/{displayOrder}")]
+        public async Task<IActionResult> UpdateMenuorder(int mmid, int displayOrder)
+        {
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_Menu_UpdateMenuOrder", conn)
+            {
+                CommandType = CommandType.StoredProcedure
+            };
+
+            cmd.Parameters.AddWithValue("@mmid", mmid);
+            cmd.Parameters.AddWithValue("@DisplayOrder", displayOrder);
+
+            await conn.OpenAsync();
+            await cmd.ExecuteNonQueryAsync();
+            return NoContent();
+        }
+
     }
 }

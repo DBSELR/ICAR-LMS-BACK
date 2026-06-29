@@ -223,4 +223,68 @@ public class ExamSubmissionsController : ControllerBase
         }
     }
 
+    [HttpGet("GetSubjectiveExamsAttPercent")]
+    public async Task<IActionResult> GetSubjectiveExamsAttPercent(int InstructorId)
+    {
+        var result = new List<object>();
+        using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        using var cmd = new SqlCommand("sp_SubjectiveExamsAttPercent", conn)
+        { CommandType = CommandType.StoredProcedure };
+        cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+        await conn.OpenAsync();
+        using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            result.Add(ReadRow(reader));
+
+        return Ok(result);
+    }
+
+    [HttpGet("GetSubjectiveExamsAttPercentByStudents")]
+    public async Task<IActionResult> GetSubjectiveExamsAttPercentByStudents(int InstructorId)
+    {
+        var result = new List<object>();
+        using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        using var cmd = new SqlCommand("sp_SubjectiveExamsAttPercentByStudents", conn)
+        { CommandType = CommandType.StoredProcedure };
+        cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+        await conn.OpenAsync();
+        using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            result.Add(ReadRow(reader));
+
+        return Ok(result);
+    }
+
+    [HttpGet("GetObjectiveExamsAttPercent")]
+    public async Task<IActionResult> GetObjectiveExamsAttPercent(int InstructorId)
+    {
+        var result = new List<object>();
+        using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        using var cmd = new SqlCommand("sp_ObjectiveExamsAttPercent", conn)
+        { CommandType = CommandType.StoredProcedure };
+        cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+        await conn.OpenAsync();
+        using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            result.Add(ReadRow(reader));
+
+        return Ok(result);
+    }
+
+    [HttpGet("GetObjectiveExamsAttPercentByStudents")]
+    public async Task<IActionResult> GetObjectiveExamsAttPercentByStudents(int InstructorId)
+    {
+        var result = new List<object>();
+        using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+        using var cmd = new SqlCommand("sp_ObjectiveExamsAttPercentByStudents", conn)
+        { CommandType = CommandType.StoredProcedure };
+        cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+        await conn.OpenAsync();
+        using var reader = await cmd.ExecuteReaderAsync();
+        while (await reader.ReadAsync())
+            result.Add(ReadRow(reader));
+
+        return Ok(result);
+    }
+
 }

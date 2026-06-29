@@ -210,7 +210,7 @@ namespace LMS.Controllers
                 cmd.Parameters.AddWithValue("@ClassName", liveClass.GetProperty("className").GetString());
                 cmd.Parameters.AddWithValue("@InstructorId", liveClass.GetProperty("instructorId").GetInt32());
                 cmd.Parameters.AddWithValue("@ExaminationID", liveClass.GetProperty("examinationID").GetInt32());
-                cmd.Parameters.AddWithValue("@Semester", liveClass.GetProperty("semester").GetInt32());
+               // cmd.Parameters.AddWithValue("@Semester", liveClass.GetProperty("semester").GetInt32());
                 cmd.Parameters.AddWithValue("@BatchName", liveClass.GetProperty("batchName").GetString());
                 cmd.Parameters.AddWithValue("@LiveDate", date.Date);
                 cmd.Parameters.AddWithValue("@StartTime", fullStart); // Full DateTime
@@ -345,7 +345,7 @@ namespace LMS.Controllers
                 cmd.Parameters.AddWithValue("@ClassName", request.GetProperty("className").GetString());
                 cmd.Parameters.AddWithValue("@InstructorId", request.GetProperty("instructorId").GetInt32());
                 cmd.Parameters.AddWithValue("@ExaminationID", request.GetProperty("examinationID").GetInt32());
-                cmd.Parameters.AddWithValue("@Semester", request.GetProperty("semester").GetInt32());
+             //   cmd.Parameters.AddWithValue("@Semester", request.GetProperty("semester").GetInt32());
                 cmd.Parameters.AddWithValue("@BatchName", request.GetProperty("batchName").GetString());
                 cmd.Parameters.AddWithValue("@LiveDate", date.Date);
                 cmd.Parameters.AddWithValue("@StartTime", fullStart);
@@ -439,9 +439,17 @@ namespace LMS.Controllers
                 CommandType = CommandType.StoredProcedure
             };
 
+            DateTime istTime = TimeZoneInfo.ConvertTimeFromUtc(
+    DateTime.UtcNow,
+    TimeZoneInfo.FindSystemTimeZoneById("India Standard Time")
+);
+
+            // Save istTime to DB
+
+
             cmd.Parameters.AddWithValue("@StudentId", dto.StudentId);
             cmd.Parameters.AddWithValue("@Examinationid", dto.ExaminationId);
-            cmd.Parameters.AddWithValue("@JoinTime", dto.JoinTime.Date);
+            cmd.Parameters.Add("@JoinTime", System.Data.SqlDbType.DateTime2).Value = istTime;
             cmd.Parameters.AddWithValue("@Status", dto.Status);
             cmd.Parameters.AddWithValue("@LiveClassId", dto.LiveClassId);
 
@@ -450,6 +458,38 @@ namespace LMS.Controllers
 
             return Ok("✅ Attendance marked successfully");
 
+        }
+
+        [HttpGet("GetLiveclassAttPercent")]
+        public async Task<IActionResult> GetCourseReadPercent(int InstructorId)
+        {
+            var result = new List<object>();
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_LiveclassAttPercent", conn)
+            { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+            await conn.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+                result.Add(ReadRow(reader));
+
+            return Ok(result);
+        }
+
+        [HttpGet("GetLiveclassAttPercentByStudents")]
+        public async Task<IActionResult> GetCourseReadPercentByStudents(int InstructorId)
+        {
+            var result = new List<object>();
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_LiveclassAttPercentByStudents", conn)
+            { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.AddWithValue("@InstructorId", InstructorId);
+            await conn.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+            while (await reader.ReadAsync())
+                result.Add(ReadRow(reader));
+
+            return Ok(result);
         }
 
         [HttpPost("UploadLiveClass")]

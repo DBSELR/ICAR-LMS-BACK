@@ -46,5 +46,21 @@ namespace LMS.Controllers
 
             return StatusCode(500, new { error = "No data returned." });
         }
+
+        [HttpGet("collegedashboard/{instructorId}")]
+        public async Task<IActionResult> GetCollegeAdminDashboardSummary(int instructorId)
+        {
+            using var conn = new SqlConnection(_configuration.GetConnectionString("DefaultConnection"));
+            using var cmd = new SqlCommand("sp_CollegeAdminSummary_GetDashboard", conn) { CommandType = CommandType.StoredProcedure };
+            cmd.Parameters.AddWithValue("@InstructorId", instructorId);
+
+            await conn.OpenAsync();
+            using var reader = await cmd.ExecuteReaderAsync();
+
+            if (await reader.ReadAsync())
+                return Ok(ReadRow(reader));
+
+            return StatusCode(500, new { error = "No data returned." });
+        }
     }
 }
