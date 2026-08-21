@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
 using LMS.DTOs;
+using ICAR_LMS_BACK.Services;
+using ICAR_LMS_BACK.Models;
 
 [Route("api/[controller]")]
 [ApiController]
@@ -15,11 +17,13 @@ public class ExamSubmissionsController : ControllerBase
 {
     private readonly IConfiguration _configuration;
     private readonly IWebHostEnvironment _env;
+    private readonly CertificatePdfService _pdfService;
 
-    public ExamSubmissionsController(IConfiguration configuration, IWebHostEnvironment env)
+    public ExamSubmissionsController(IConfiguration configuration, IWebHostEnvironment env, CertificatePdfService pdfService)
     {
         _configuration = configuration;
         _env = env;
+        _pdfService = pdfService;
     }
 
     private Dictionary<string, object> ReadRow(SqlDataReader reader)
@@ -285,6 +289,124 @@ public class ExamSubmissionsController : ControllerBase
             result.Add(ReadRow(reader));
 
         return Ok(result);
+    }
+
+    [HttpGet("GenerateCertificate/{studentId}/{courseId}")]
+    public async Task<IActionResult> GenerateCertificate(
+      int studentId,
+      int courseId)
+    {
+        using var conn = new SqlConnection(
+              _configuration.GetConnectionString("DefaultConnection"));
+
+        using var cmd = new SqlCommand(
+              "sp_GenerateDBSCertificate",
+              conn);
+
+        cmd.CommandType = CommandType.StoredProcedure;
+
+        cmd.Parameters.AddWithValue("@StudentId", studentId);
+        cmd.Parameters.AddWithValue("@CourseId", courseId);
+
+        await conn.OpenAsync();
+
+        using var reader =
+              await cmd.ExecuteReaderAsync();
+
+        if (await reader.ReadAsync())
+        {
+            return Ok(new
+            {
+                assignmentAverage =
+         reader["AssignmentAverage"],
+
+                assignmentScore =
+         reader["AssignmentScore"],
+
+                examScore =
+         reader["ExamScore"],
+
+                finalScore =
+         reader["FinalScore"],
+
+                status =
+         reader["CertificateStatus"],
+
+                category =
+         reader["CertificateCategory"]
+            });
+        }
+
+        return NotFound();
+    }
+
+    [HttpGet("DownloadCertificate/{studentId}/{courseId}")]
+    public async Task<IActionResult> DownloadCertificate(
+    int studentId,
+    int courseId)
+    {
+        using var conn =
+            new SqlConnection(
+                _configuration.GetConnectionString("DefaultConnection"));
+
+        await conn.OpenAsync();
+
+        var sql = @"
+        SELECT
+            U.FullName,
+            E.Title,
+            S.FinalScore,
+            S.CertificateCategory
+        FROM StudentCertificates S
+        INNER JOIN Users U
+            ON S.StudentId = U.UserId
+        INNER JOIN SubjectBank E
+            ON S.CourseId = E.ExaminationId
+        WHERE
+            S.StudentId=@StudentId
+            AND S.CourseId=@CourseId";
+
+        using var cmd = new SqlCommand(sql, conn);
+
+        cmd.Parameters.AddWithValue(
+            "@StudentId",
+            studentId);
+
+        cmd.Parameters.AddWithValue(
+            "@CourseId",
+            courseId);
+
+        using var reader =
+            await cmd.ExecuteReaderAsync();
+
+        if (!await reader.ReadAsync())
+            return NotFound();
+
+        var data = new CertificateModel
+        {
+            StudentName =
+                reader["FullName"].ToString(),
+
+            CourseName =
+                reader["Title"].ToString(),
+
+            FinalScore =
+                Convert.ToDecimal(
+                    reader["FinalScore"]),
+
+            CertificateCategory =
+                reader["CertificateCategory"]
+                    .ToString()
+        };
+
+        var pdf =
+            _pdfService
+                .GenerateCertificatePdf(data);
+
+        return File(
+            pdf,
+            "application/pdf",
+            $"Certificate_{studentId}.pdf");
     }
 
 }

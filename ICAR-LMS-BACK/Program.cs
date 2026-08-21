@@ -11,6 +11,7 @@ using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.SignalR;
 using LMS.Models;
 using LMS_SA_BACK.Services;
+using ICAR_LMS_BACK.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,8 @@ builder.Services.AddControllers()
         options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
         options.JsonSerializerOptions.WriteIndented = true;
     });
+
+builder.Services.AddScoped<CertificatePdfService>();
 
 // ================================
 // Database
@@ -132,7 +135,9 @@ builder.Services.AddCors(options =>
                 "https://www.skillascent.in",
                 "https://lms.skillascent.in",
                 "https://www.lms.skillascent.in",
-                "https://mercury-uat.phonepe.com"
+                "https://mercury-uat.phonepe.com",
+                "https://icar.dbasesolutions.in",
+                "https://www.icar.dbasesolutions.in"
             )
             .AllowAnyHeader()
             .AllowAnyMethod()
